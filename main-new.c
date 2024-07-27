@@ -1,34 +1,44 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-struct Node{
-    int data;
-    struct Node* left;
-    struct Node* right;
-};
+void printArray(int arr[], int length);
+int arrayLength(int arr[]);
+void bubbleSortArray(int* arr, int length);
 
-char* nodeToString(struct Node* node){
-    if (node == NULL)
-    {
-        char* str = malloc(5 * sizeof(char));
-        sprintf(str, "Null");
-        return str;
-    } else{
-        char* leftStr = nodeToString(node->left);
-        char* rightStr = nodeToString(node->right);
-        char* result = malloc(sizeof(char) * (strlen(leftStr) + strlen(rightStr)));
-        sprintf(result, "Node(data: %d,left: %s,right: %s)", node->data, leftStr, rightStr);
-        return result;
-    }
-}
 
 int main(){
-    struct Node left = {1, NULL, NULL};
-    struct Node right = {2, NULL, NULL};
-    
-    struct Node root = {0, &left, &right};
-
-    printf("Your Node is: %s\n", nodeToString(&root));
+    int arr[] = {1,2,5,23,6,34,734,324,45,3423,43};
+    int length = sizeof(arr)/sizeof(arr[0]);
+    printArray(arr, length);
+    bubbleSortArray(arr, length);
+    printArray(arr, length);
     return 0;
+}
+
+
+void printArray(int arr[], int length){
+    for (int i = 0; i < length; i++)
+    {
+        printf("%d,", arr[i]);
+    }
+    printf("\n");
+}
+
+// int arrayLength(int* arr){
+//     return sizeof(&arr) / sizeof(arr[0]);
+// }
+
+
+void bubbleSortArray(int* arr, int length){
+    for (int i = 0; i < length; i++)
+    {
+        for (int j = 0; j < length -i -1; j++)
+        {
+            if (arr[j] > arr[j+1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
 }
